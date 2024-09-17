@@ -4,7 +4,7 @@ using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BitBotterich;
-using System.Text;
+using BitBotterich.util;
 
 public class Program
 {
@@ -22,18 +22,20 @@ public class Program
     {
         if (!File.Exists("./config.json"))
         {
-            FileStream config = File.Create("./config.json");
-
             string configContent =
-@"{
-    ""TOKEN"": """"
-}
-";
-            config.Write(new UTF8Encoding(true).GetBytes(configContent), 0, configContent.Length);
-            config.Close();
+                    @"{
+                        ""TOKEN"": """"
+                    }
+                    ";
+            File.WriteAllText("./config.json", configContent);
 
-            Console.WriteLine("Please add a Token in the config.json (" + config.Name + ")");
+            Console.WriteLine("Please add a Token in the config.json");
             return;
+        }
+
+        if (File.Exists("./Quotes.json"))
+        {
+            QuoteHelper.LoadQuotes();
         }
 
         _config = new ConfigurationBuilder()
