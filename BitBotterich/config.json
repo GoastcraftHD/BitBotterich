@@ -1,3 +1,5 @@
 {
-    "TOKEN": ""
+  "TOKEN": "",
+  "TENOR_API_KEY": "",
+  "TENOR_APP_NAME": ""
 }
