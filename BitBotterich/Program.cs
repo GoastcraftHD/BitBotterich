@@ -8,7 +8,7 @@ using BitBotterich.util;
 
 public class Program
 {
-    private static IConfiguration _config;
+    public static IConfiguration Config;
     private static IServiceProvider _services;
 
     private static readonly DiscordSocketConfig _socketConfig = new()
@@ -24,7 +24,9 @@ public class Program
         {
             string configContent =
                     @"{
-                        ""TOKEN"": """"
+                        ""TOKEN"": """",
+                        ""TENOR_API_KEY"": """",
+                        ""TENOR_APP_NAME"": """"
                     }
                     ";
             File.WriteAllText("./config.json", configContent);
@@ -38,13 +40,13 @@ public class Program
             QuoteHelper.LoadQuotes();
         }
 
-        _config = new ConfigurationBuilder()
+        Config = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
             .AddJsonFile(path: "config.json")
             .Build();
 
         _services = new ServiceCollection()
-            .AddSingleton(_config)
+            .AddSingleton(Config)
             .AddSingleton(_socketConfig)
             .AddSingleton<DiscordSocketClient>()
             .AddSingleton(x => new InteractionService(x.GetRequiredService<DiscordSocketClient>()))
@@ -58,7 +60,7 @@ public class Program
         await _services.GetRequiredService<InteractionHandler>()
             .InitializeAsync();
 
-        await client.LoginAsync(TokenType.Bot, _config["Token"]);
+        await client.LoginAsync(TokenType.Bot, Config["Token"]);
         await client.StartAsync();
 
         await Task.Delay(Timeout.Infinite);
