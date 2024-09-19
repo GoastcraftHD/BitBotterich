@@ -22,17 +22,7 @@ public class Program
     {
         if (!File.Exists("./config.json"))
         {
-            string configContent =
-                    @"{
-                        ""TOKEN"": """",
-                        ""TENOR_API_KEY"": """",
-                        ""TENOR_APP_NAME"": """"
-                    }
-                    ";
-            File.WriteAllText("./config.json", configContent);
-
-            Console.WriteLine("Please add a Token in the config.json");
-            return;
+            File.Copy("../../../config.json", "./config.json");
         }
 
         if (File.Exists("./Quotes.json"))
