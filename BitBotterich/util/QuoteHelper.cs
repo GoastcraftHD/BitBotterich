@@ -16,12 +16,12 @@ namespace BitBotterich.util
         public static void SaveQuotes()
         {
             string quoteJson = JsonConvert.SerializeObject(QuoteCounter);
-            File.WriteAllText("./Quotes.json", quoteJson);
+            File.WriteAllText("./data/quotes.json", quoteJson);
         }
 
         public static void LoadQuotes()
         {
-            string quoteJson = File.ReadAllText("./Quotes.json");
+            string quoteJson = File.ReadAllText("./data/quotes.json");
             QuoteCounter = JsonConvert.DeserializeObject<Dictionary<string, Quote>>(quoteJson);
         }
 

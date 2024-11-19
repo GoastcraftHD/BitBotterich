@@ -9,6 +9,7 @@ using BitBotterich.util;
 public class Program
 {
     public static IConfiguration Config;
+
     private static IServiceProvider _services;
 
     private static readonly DiscordSocketConfig _socketConfig = new()
@@ -22,10 +23,11 @@ public class Program
     {
         if (!File.Exists("./config.json"))
         {
+            // For non docker enviorments
             File.Copy("../../../config.json", "./config.json");
         }
 
-        if (File.Exists("./Quotes.json"))
+        if (File.Exists("./data/quotes.json"))
         {
             QuoteHelper.LoadQuotes();
         }
