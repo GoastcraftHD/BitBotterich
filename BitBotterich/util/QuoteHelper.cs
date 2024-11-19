@@ -22,7 +22,15 @@ namespace BitBotterich.util
         public static void LoadQuotes()
         {
             string quoteJson = File.ReadAllText("./data/quotes.json");
-            QuoteCounter = JsonConvert.DeserializeObject<Dictionary<string, Quote>>(quoteJson);
+            Dictionary<string, Quote>? result = JsonConvert.DeserializeObject<Dictionary<string, Quote>>(quoteJson);
+
+            if (result is null)
+            {
+                Console.WriteLine("Could not retrieve quotes");
+                return;
+            }
+
+            QuoteCounter = result;
         }
 
         public static string CreateQuoteText(Quote quote)

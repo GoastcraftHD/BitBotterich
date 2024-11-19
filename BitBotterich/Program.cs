@@ -8,9 +8,9 @@ using BitBotterich.util;
 
 public class Program
 {
-    public static IConfiguration Config;
+    public static IConfiguration? Config;
 
-    private static IServiceProvider _services;
+    private static IServiceProvider? _services;
 
     private static readonly DiscordSocketConfig _socketConfig = new()
     {
@@ -37,6 +37,12 @@ public class Program
             .AddJsonFile(path: "config.json")
             .Build();
 
+        if (Config is null)
+        {
+            Console.WriteLine("Could not create the config");
+            return;
+        }
+
         _services = new ServiceCollection()
             .AddSingleton(Config)
             .AddSingleton(_socketConfig)
@@ -59,5 +65,8 @@ public class Program
     }
 
     private static async Task LogAsync(LogMessage message)
-        => Console.WriteLine(message.ToString());
+    {
+        Console.WriteLine(message.ToString());
+        await Task.CompletedTask;
+    }
 }

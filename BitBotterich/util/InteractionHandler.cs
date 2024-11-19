@@ -38,7 +38,10 @@ namespace BitBotterich
         }
 
         private async Task LogAsync(LogMessage log)
-            => Console.WriteLine(log);
+        {
+            Console.WriteLine(log);
+            await Task.CompletedTask;
+        }
 
         private async Task ReadyAsync()
         {
@@ -83,6 +86,7 @@ namespace BitBotterich
         private async Task HandleInteractionExecute(ICommandInfo commandInfo, IInteractionContext context, IResult result)
         {
             if (!result.IsSuccess)
+            {
                 switch (result.Error)
                 {
                     case InteractionCommandError.UnmetPrecondition:
@@ -91,6 +95,9 @@ namespace BitBotterich
                     default:
                         break;
                 }
+            }
+
+            await Task.CompletedTask;
         }
     }
 }
