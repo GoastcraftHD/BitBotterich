@@ -2,3 +2,7 @@
   bot:
     build: .
     image: bitbotterich
+    volumes:
+        - bitbotterichdata:data
+volumes:
+    bitbotterichdata:
