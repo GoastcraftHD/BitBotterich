@@ -1,17 +1,10 @@
-﻿using Discord;
-using Discord.Interactions;
-using Discord.WebSocket;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Discord.Interactions;
 
 namespace BitBotterich
 {
     public class InfoModule : InteractionModuleBase<SocketInteractionContext>
     {
-        public InteractionService Commands { get; set; }
+        public InteractionService? Commands { get; set; }
         private InteractionHandler _handler;
 
         public InfoModule(InteractionHandler handler)

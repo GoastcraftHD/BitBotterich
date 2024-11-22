@@ -61,6 +61,11 @@ public class Program
         await client.LoginAsync(TokenType.Bot, Config["Token"]);
         await client.StartAsync();
 
+        SpotifyUtil.ClientID = Config["SpotifyClientID"];
+        SpotifyUtil.ClientSecret = Config["SpotifyClientSecret"];
+
+        await SpotifyUtil.GetTokenAsync();
+
         await Task.Delay(Timeout.Infinite);
     }
 

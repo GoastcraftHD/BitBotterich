@@ -7,7 +7,7 @@ namespace BitBotterich.commands
 {
     public class QuoteCommand : InteractionModuleBase<SocketInteractionContext>
     {
-        public InteractionService Commands { get; set; }
+        public InteractionService? Commands { get; set; }
         private InteractionHandler _handler;
 
         public QuoteCommand(InteractionHandler handler)
@@ -51,6 +51,13 @@ namespace BitBotterich.commands
             QuoteCounter[quoteId] = quote;
 
             SocketMessageComponent? originalMsg = Context.Interaction as SocketMessageComponent;
+
+            if (originalMsg is null)
+            {
+                await ReplyAsync("Error: Could not retrieve original Message!");
+                return;
+            }
+
             await originalMsg.UpdateAsync(x =>
             {
                 x.Content = CreateQuoteText(quote);
@@ -74,6 +81,13 @@ namespace BitBotterich.commands
             QuoteCounter[quoteId] = quote;
 
             SocketMessageComponent? originalMsg = Context.Interaction as SocketMessageComponent;
+
+            if (originalMsg is null)
+            {
+                await ReplyAsync("Error: Could not retrieve original Message!");
+                return;
+            }
+
             await originalMsg.UpdateAsync(x =>
             {
                 x.Content = CreateQuoteText(quote);
