@@ -3,6 +3,8 @@
     build: .
     image: bitbotterich
     volumes:
-        - bitbotterichdata:/data
+        - type: volume
+          source: bitbotterichdata
+          target: /data
 volumes:
     bitbotterichdata:
