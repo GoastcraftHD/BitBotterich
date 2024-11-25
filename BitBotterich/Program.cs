@@ -58,11 +58,28 @@ public class Program
         await _services.GetRequiredService<InteractionHandler>()
             .InitializeAsync();
 
-        await client.LoginAsync(TokenType.Bot, Config["Token"]);
+        string? botToken = Config["Token"];
+
+        if (botToken is null)
+        {
+            Console.WriteLine("Could not retrieve Discord credentials!");
+            return;
+        }
+
+        await client.LoginAsync(TokenType.Bot, botToken);
         await client.StartAsync();
 
-        SpotifyUtil.ClientID = Config["SpotifyClientID"];
-        SpotifyUtil.ClientSecret = Config["SpotifyClientSecret"];
+        string? spotifyClientID = Config["SpotifyClientID"];
+        string? spotifyClientSecret = Config["SpotifyClientSecret"];
+
+        if (string.IsNullOrEmpty(spotifyClientID) || string.IsNullOrEmpty(spotifyClientSecret))
+        {
+            Console.WriteLine("Could not retrieve Spotify credentials!");
+            return;
+        }
+
+        SpotifyUtil.ClientID = spotifyClientID;
+        SpotifyUtil.ClientSecret = spotifyClientSecret;
 
         await SpotifyUtil.GetTokenAsync();
 
