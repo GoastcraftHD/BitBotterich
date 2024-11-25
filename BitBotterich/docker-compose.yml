@@ -3,13 +3,11 @@
     build: .
     image: bitbotterich
     volumes:
-        - type: volume
-          source: bitbotterichdata
-          target: /data
+        - bitbotterich:/data
 volumes:
-    bitbotterichdata:
+    bitbotterich:
         driver: local
         driver_opts:
           type: none
-          device: /data/bitbotterichdata
+          device: /data/bitbotterich
           o: bind
