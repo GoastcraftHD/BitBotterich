@@ -8,3 +8,8 @@
           target: /data
 volumes:
     bitbotterichdata:
+        driver: local
+        driver_opts:
+          type: none
+          device: /data/bitbotterichdata
+          o: bind
