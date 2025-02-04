@@ -30,11 +30,6 @@ public class Program
         if (File.Exists("./data/quotes.json"))
         {
             QuoteHelper.LoadQuotes();
-            string[] lines = File.ReadAllLines("./data/quotes.json");
-            foreach (string line in lines)
-            {
-                Console.WriteLine(line);
-            }
         }
 
         Config = new ConfigurationBuilder()

@@ -9,5 +9,5 @@ volumes:
         driver: local
         driver_opts:
           type: none
-          device: /data/bitbotterich
+          device: /data
           o: bind
