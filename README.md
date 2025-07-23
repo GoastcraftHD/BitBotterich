@@ -9,3 +9,7 @@ Creates a message containing the quote and who said it with a counter displaying
 ### Meme
 ```/meme``` <br>
 Send a random meme gif from Tenor.
+
+### Spotify
+```/spotify search <name>``` <br>
+Searches for an artist via the Spotify api and displays all the songs/albums and more.
